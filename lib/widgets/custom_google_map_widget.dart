@@ -89,10 +89,13 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
   }
 
   void initPolyLines() {
-    var polyLine = const Polyline(
+    var polyLineA = const Polyline(
+      geodesic: true,
+      startCap: Cap.roundCap,
       polylineId: PolylineId('1'),
       color: Colors.red,
       width: 5,
+      zIndex: 2,
       points: [
         LatLng(30.069322602887198, 31.312299884707596),
         LatLng(30.065068100493647, 31.289358512123748),
@@ -100,7 +103,20 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
         LatLng(30.05059617080793, 31.31934009428447),
       ],
     );
-    polyLines.add(polyLine);
+    var polyLineB = const Polyline(
+      geodesic: true,
+      startCap: Cap.roundCap,
+      polylineId: PolylineId('2'),
+      color: Colors.green,
+      width: 5,
+      zIndex: 1,
+      points: [
+        LatLng(30.056427220695184, 31.31703381873318),
+        LatLng(30.0481795988592, 31.30999360915583),
+      ],
+    );
+    polyLines.add(polyLineA);
+    polyLines.add(polyLineB);
     setState(() {});
   }
 }
