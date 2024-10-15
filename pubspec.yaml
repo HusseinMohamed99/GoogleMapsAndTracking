@@ -31,7 +31,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter:
     sdk: flutter
-  google_maps_flutter: ^2.9.0
+  google_maps_flutter: ^2.2.8
 
 dev_dependencies:
   # The "flutter_lints" package below contains a set of recommended lints to
