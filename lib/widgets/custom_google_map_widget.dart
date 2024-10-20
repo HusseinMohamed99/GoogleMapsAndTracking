@@ -52,21 +52,21 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
             initMapStyle();
           },
         ),
-        Positioned(
-          bottom: 16,
-          right: 16,
-          left: 16,
-          child: ElevatedButton(
-            onPressed: () {
-              googleMapController.animateCamera(
-                CameraUpdate.newLatLng(
-                  const LatLng(30.05059617080793, 31.31934009428447),
-                ),
-              );
-            },
-            child: const Text('Update Location'),
-          ),
-        )
+        // Positioned(
+        //   bottom: 16,
+        //   right: 16,
+        //   left: 16,
+        //   child: ElevatedButton(
+        //     onPressed: () {
+        //       googleMapController.animateCamera(
+        //         CameraUpdate.newLatLng(
+        //           const LatLng(30.05059617080793, 31.31934009428447),
+        //         ),
+        //       );
+        //     },
+        //     child: const Text('Update Location'),
+        //   ),
+        // ),
       ],
     );
   }
@@ -175,3 +175,13 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
     circles.add(aboAlEzz);
   }
 }
+
+
+/// Live Location Tracker
+// Steps:
+// 1. inquire about location service.
+// 2. request permission
+// 3. get the current location
+// 4. listen to location changes
+// 5. update the map with the new location
+ 
