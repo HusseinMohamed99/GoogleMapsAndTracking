@@ -31,7 +31,7 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
 
   GoogleMapController? googleMapController;
 
-  Set<Marker> marker = {};
+  Set<Marker> markers = {};
   Set<Polyline> polyLines = {};
   Set<Polygon> polygons = {};
   Set<Circle> circles = {};
@@ -89,7 +89,7 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
         )
         .toSet();
 
-    marker.addAll(myMarker);
+    markers.addAll(myMarker);
     setState(() {});
   }
 
@@ -199,11 +199,22 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
   }
 
   Future<void> getLocationData() async {
+    location.changeSettings(
+      distanceFilter: 2,
+    );
     location.onLocationChanged.listen(
       (locationData) {
         var cameraPosition = CameraPosition(
           target: LatLng(locationData.latitude!, locationData.longitude!),
+          zoom: 15,
         );
+        var myLocationMarker = Marker(
+          markerId: const MarkerId('MyLocationMarker'),
+          position: LatLng(locationData.latitude!, locationData.longitude!),
+        );
+        markers.add(myLocationMarker);
+        setState(() {});
+
         googleMapController
             ?.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
       },
