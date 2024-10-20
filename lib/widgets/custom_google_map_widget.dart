@@ -40,7 +40,7 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
     return Stack(
       children: [
         GoogleMap(
-          // markers: marker,
+          markers: markers,
           // polylines: polyLines,
           // polygons: polygons,
           // circles: circles,
@@ -198,7 +198,7 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
     return true;
   }
 
-  Future<void> getLocationData() async {
+  void getLocationData() {
     location.changeSettings(
       distanceFilter: 2,
     );
@@ -209,9 +209,8 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
           zoom: 15,
         );
         var myLocationMarker = Marker(
-          markerId: const MarkerId('MyLocationMarker'),
-          position: LatLng(locationData.latitude!, locationData.longitude!),
-        );
+            markerId: const MarkerId('my_location_marker'),
+            position: LatLng(locationData.latitude!, locationData.longitude!));
         markers.add(myLocationMarker);
         setState(() {});
 
@@ -225,7 +224,7 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
     await checkAndRequestLocationService();
     var hasPermission = await checkAndRequestLocationPermission();
     if (hasPermission) {
-      await getLocationData();
+      getLocationData();
     } else {
       // TODO: Show Error Based On MY APP
     }
