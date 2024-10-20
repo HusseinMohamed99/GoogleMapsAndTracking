@@ -189,6 +189,21 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
       }
     }
   }
+
+  void checkAndRequestLocationPermission() async {
+    var permissionStatus = await location.hasPermission();
+    if (permissionStatus == PermissionStatus.denied) {
+      permissionStatus == await location.requestPermission();
+      if (permissionStatus != PermissionStatus.granted) {
+        // TODO: Show Error Based On MY APP
+      }
+    }
+  }
+
+  void initRequestLocationServiceAndPermission() {
+    checkAndRequestLocationService();
+    checkAndRequestLocationPermission();
+  }
 }
 
 
