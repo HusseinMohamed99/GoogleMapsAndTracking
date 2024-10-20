@@ -14,12 +14,13 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
   @override
   void initState() {
     initialCameraPosition = const CameraPosition(
-      zoom: 1,
-      target: LatLng(31.187084851056554, 29.928110526889437),
+      zoom: 13,
+      target: LatLng(30.067191189940004, 31.336155921974264),
     );
     // initMarkers();
     // initPolyLines();
-    initPolygons();
+    // initPolygons();
+    initCircle();
     super.initState();
   }
 
@@ -34,6 +35,7 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
   Set<Marker> marker = {};
   Set<Polyline> polyLines = {};
   Set<Polygon> polygons = {};
+  Set<Circle> circles = {};
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -41,7 +43,8 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
         GoogleMap(
           // markers: marker,
           // polylines: polyLines,
-          polygons: polygons,
+          // polygons: polygons,
+          circles: circles,
           zoomControlsEnabled: false,
           initialCameraPosition: initialCameraPosition,
           onMapCreated: (controller) {
@@ -158,5 +161,17 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
       ],
     );
     polygons.add(polygon);
+  }
+
+  void initCircle() {
+    Circle aboAlEzz = Circle(
+      circleId: const CircleId('1'),
+      center: const LatLng(30.06347706140572, 31.33671382143424),
+      radius: 1000,
+      fillColor: Colors.black.withOpacity(0.5),
+      strokeWidth: 1,
+      strokeColor: Colors.red,
+    );
+    circles.add(aboAlEzz);
   }
 }
