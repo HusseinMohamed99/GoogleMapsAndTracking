@@ -190,14 +190,20 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
     }
   }
 
-  Future<void> checkAndRequestLocationPermission() async {
+  Future<bool> checkAndRequestLocationPermission() async {
     var permissionStatus = await location.hasPermission();
+    if (permissionStatus == PermissionStatus.deniedForever) {
+      return false;
+    }
     if (permissionStatus == PermissionStatus.denied) {
       permissionStatus == await location.requestPermission();
       if (permissionStatus != PermissionStatus.granted) {
         // TODO: Show Error Based On MY APP
+
+        return false;
       }
     }
+    return true;
   }
 
   Future<void> getLocationData() async {
@@ -206,8 +212,12 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
 
   void updateMyLocation() async {
     await checkAndRequestLocationService();
-    await checkAndRequestLocationPermission();
-    await getLocationData();
+    var hasPermission = await checkAndRequestLocationPermission();
+    if (hasPermission) {
+      await getLocationData();
+    } else {
+      // TODO: Show Error Based On MY APP
+    }
   }
 }
 
