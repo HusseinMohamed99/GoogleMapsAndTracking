@@ -14,11 +14,12 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
   @override
   void initState() {
     initialCameraPosition = const CameraPosition(
-      target: LatLng(30.06323964400769, 31.349160175141957),
-      zoom: 17,
+      zoom: 1,
+      target: LatLng(31.187084851056554, 29.928110526889437),
     );
-    initMarkers();
-    initPolyLines();
+    // initMarkers();
+    // initPolyLines();
+    initPolygons();
     super.initState();
   }
 
@@ -32,13 +33,15 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
 
   Set<Marker> marker = {};
   Set<Polyline> polyLines = {};
+  Set<Polygon> polygons = {};
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         GoogleMap(
-          markers: marker,
-          polylines: polyLines,
+          // markers: marker,
+          // polylines: polyLines,
+          polygons: polygons,
           zoomControlsEnabled: false,
           initialCameraPosition: initialCameraPosition,
           onMapCreated: (controller) {
@@ -118,5 +121,42 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
     polyLines.add(polyLineA);
     polyLines.add(polyLineB);
     setState(() {});
+  }
+
+  void initPolygons() {
+    Polygon polygon = Polygon(
+      polygonId: const PolygonId('1'),
+      fillColor: Colors.black.withOpacity(0.5),
+      strokeWidth: 1,
+      strokeColor: Colors.red,
+      holes: const [
+        [
+          LatLng(30.060280998829203, 31.505664500439217),
+          LatLng(30.11355587976404, 31.342828576515803),
+          LatLng(30.05160244782071, 31.2204202635576),
+          LatLng(30.0835832583514, 31.188085992210144),
+        ],
+      ],
+      points: const [
+        LatLng(31.5, 25.0),
+        LatLng(31.5, 28.0),
+        LatLng(31.2, 30.0),
+        LatLng(31.0, 32.0),
+        LatLng(31.0, 34.0),
+        LatLng(31.0, 34.0),
+        LatLng(29.5, 34.5),
+        LatLng(28.0, 34.5),
+        LatLng(25.0, 34.0),
+        LatLng(25.0, 34.0),
+        LatLng(22.0, 36.0),
+        LatLng(22.0, 36.0),
+        LatLng(22.0, 31.0),
+        LatLng(22.0, 25.0),
+        LatLng(22.0, 25.0),
+        LatLng(25.0, 25.0),
+        LatLng(31.5, 25.0)
+      ],
+    );
+    polygons.add(polygon);
   }
 }
