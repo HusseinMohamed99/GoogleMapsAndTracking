@@ -29,13 +29,7 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    googleMapController.dispose();
-    super.dispose();
-  }
-
-  late GoogleMapController googleMapController;
+  GoogleMapController? googleMapController;
 
   Set<Marker> marker = {};
   Set<Polyline> polyLines = {};
@@ -79,7 +73,7 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
   void initMapStyle() async {
     var darkMapStyle = await DefaultAssetBundle.of(context)
         .loadString('assets/maps/dark_map_style.json');
-    googleMapController.setMapStyle(darkMapStyle);
+    googleMapController!.setMapStyle(darkMapStyle);
   }
 
   void initMarkers() async {
@@ -205,7 +199,15 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
   }
 
   Future<void> getLocationData() async {
-    location.onLocationChanged.listen((locationData) {});
+    location.onLocationChanged.listen(
+      (locationData) {
+        var cameraPosition = CameraPosition(
+          target: LatLng(locationData.latitude!, locationData.longitude!),
+        );
+        googleMapController
+            ?.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+      },
+    );
   }
 
   void updateMyLocation() async {
