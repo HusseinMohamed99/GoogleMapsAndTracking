@@ -198,8 +198,6 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
     if (permissionStatus == PermissionStatus.denied) {
       permissionStatus == await location.requestPermission();
       if (permissionStatus != PermissionStatus.granted) {
-        // TODO: Show Error Based On MY APP
-
         return false;
       }
     }
