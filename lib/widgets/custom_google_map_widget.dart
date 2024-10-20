@@ -20,7 +20,7 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
     // initMarkers();
     // initPolyLines();
     // initPolygons();
-    initCircle();
+    // initCircle();
     super.initState();
   }
 
@@ -44,7 +44,7 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
           // markers: marker,
           // polylines: polyLines,
           // polygons: polygons,
-          circles: circles,
+          // circles: circles,
           zoomControlsEnabled: false,
           initialCameraPosition: initialCameraPosition,
           onMapCreated: (controller) {
