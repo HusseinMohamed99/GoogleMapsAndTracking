@@ -27,4 +27,8 @@ class LocationService {
     }
     return true;
   }
+
+  void getRealTimeLocation(void Function(LocationData)? onData) {
+    location.onLocationChanged.listen(onData);
+  }
 }
