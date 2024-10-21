@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps/helpers/location_service.dart';
 import 'package:google_maps/model/place_model.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location_platform_interface/location_platform_interface.dart';
+import 'package:location/location.dart';
 
 class CustomGoogleMap extends StatefulWidget {
   const CustomGoogleMap({super.key});
