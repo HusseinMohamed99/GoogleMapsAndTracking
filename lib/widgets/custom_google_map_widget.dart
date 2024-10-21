@@ -199,7 +199,7 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
       );
       googleMapController
           ?.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
-      // isFirstCall = false;
+      isFirstCall = false;
     } else {
       googleMapController?.animateCamera(CameraUpdate.newLatLng(
           LatLng(locationData.latitude!, locationData.longitude!)));
