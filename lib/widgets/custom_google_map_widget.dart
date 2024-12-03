@@ -26,7 +26,7 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
     // initPolygons();
     // initCircle();
     locationService = LocationService();
-    updateMyLocation();
+    // updateMyLocation();
     super.initState();
   }
 
@@ -176,20 +176,20 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
     circles.add(aboAlEzz);
   }
 
-  void updateMyLocation() async {
-    await locationService.checkAndRequestLocationService();
-    var hasPermission =
-        await locationService.checkAndRequestLocationPermission();
+  // void updateMyLocation() async {
+  //   await locationService.checkAndRequestLocationService();
+  //   var hasPermission =
+  //       await locationService.checkAndRequestLocationPermission();
 
-    if (hasPermission) {
-      locationService.getRealTimeLocation((locationData) {
-        updateMyLocationMarker(locationData);
-        updateCamera(locationData);
-      });
-    } else {
-      // TODO: Show Error Based On MY APP
-    }
-  }
+  //   if (hasPermission) {
+  //     locationService.getRealTimeLocation((locationData) {
+  //       updateMyLocationMarker(locationData);
+  //       updateCamera(locationData);
+  //     });
+  //   } else {
+  //     // TODO: Show Error Based On MY APP
+  //   }
+  // }
 
   void updateCamera(LocationData locationData) {
     if (isFirstCall) {
@@ -206,13 +206,13 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
     }
   }
 
-  void updateMyLocationMarker(LocationData locationData) {
-    var myLocationMarker = Marker(
-        markerId: const MarkerId('my_location_marker'),
-        position: LatLng(locationData.latitude!, locationData.longitude!));
-    markers.add(myLocationMarker);
-    setState(() {});
-  }
+  // void updateMyLocationMarker(LocationData locationData) {
+  //   var myLocationMarker = Marker(
+  //       markerId: const MarkerId('my_location_marker'),
+  //       position: LatLng(locationData.latitude!, locationData.longitude!));
+  //   markers.add(myLocationMarker);
+  //   setState(() {});
+  // }
 }
 
 
