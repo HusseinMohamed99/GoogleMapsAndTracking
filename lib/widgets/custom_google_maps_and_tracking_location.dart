@@ -21,7 +21,6 @@ class _CustomGoogleMapsAndTrackingLocationState
       target: LatLng(0, 0),
     );
     locationService = LocationService();
-    updateCurrentLocation();
     super.initState();
   }
 
@@ -35,6 +34,7 @@ class _CustomGoogleMapsAndTrackingLocationState
       // on map created
       onMapCreated: (controller) {
         googleMapController = controller;
+        updateCurrentLocation();
       },
     );
   }
@@ -42,12 +42,19 @@ class _CustomGoogleMapsAndTrackingLocationState
   void updateCurrentLocation() async {
     try {
       var locationData = await locationService.getLocation();
+      CameraPosition newCameraPosition = CameraPosition(
+        target: LatLng(locationData.latitude!, locationData.longitude!),
+        zoom: 16,
+      );
+      googleMapController.animateCamera(
+        CameraUpdate.newCameraPosition(newCameraPosition),
+      );
     } on LocationServiceException catch (e) {
-      // TODO
+      log('Error getting location: $e');
     } on LocationPermissionException catch (e) {
-      // TODO
+      log('Error getting location: $e');
     } catch (e) {
-      // TODO
+      log('Error getting location: $e');
     }
   }
 }
