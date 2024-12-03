@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps/widgets/custom_google_map_widget.dart';
+import 'package:google_maps/core/helpers/export_manager/export_manager.dart';
 
 void main() {
   runApp(const GoogleMapsApp());
@@ -13,7 +13,7 @@ class GoogleMapsApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Google Maps And Tracking',
       debugShowCheckedModeBanner: false,
-      home: CustomGoogleMap(),
+      home: CustomGoogleMapsAndTrackingLocation(),
     );
   }
 }

@@ -1,4 +1,4 @@
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+part of './../core/helpers/export_manager/export_manager.dart';
 
 class PlaceModel {
   int markerId;
