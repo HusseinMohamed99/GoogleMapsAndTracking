@@ -7,10 +7,10 @@ class CustomGoogleMap extends StatefulWidget {
   State<CustomGoogleMap> createState() => _CustomGoogleMapState();
 }
 
-late LocationService locationService;
-
 class _CustomGoogleMapState extends State<CustomGoogleMap> {
   late CameraPosition initialCameraPosition;
+  late LocationService locationService;
+
   @override
   void initState() {
     initialCameraPosition = const CameraPosition(
