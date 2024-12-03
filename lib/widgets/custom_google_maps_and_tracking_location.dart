@@ -19,9 +19,7 @@ class _CustomGoogleMapsAndTrackingLocationState
       zoom: 13,
       target: LatLng(0, 0),
     );
-
     locationService = LocationService();
-
     super.initState();
   }
 
