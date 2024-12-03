@@ -12,6 +12,7 @@ class _CustomGoogleMapsAndTrackingLocationState
     extends State<CustomGoogleMapsAndTrackingLocation> {
   late CameraPosition initialCameraPosition;
   late LocationService locationService;
+  late GoogleMapController googleMapController;
 
   @override
   void initState() {
@@ -27,8 +28,14 @@ class _CustomGoogleMapsAndTrackingLocationState
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
-      // Add initial camera position
+      //
+      zoomControlsEnabled: false,
+      // initial camera position
       initialCameraPosition: initialCameraPosition,
+      // on map created
+      onMapCreated: (controller) {
+        googleMapController = controller;
+      },
     );
   }
 
