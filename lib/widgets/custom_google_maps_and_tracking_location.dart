@@ -20,6 +20,7 @@ class _CustomGoogleMapsAndTrackingLocationState
       target: LatLng(0, 0),
     );
     locationService = LocationService();
+    updateCurrentLocation();
     super.initState();
   }
 
@@ -29,5 +30,17 @@ class _CustomGoogleMapsAndTrackingLocationState
       // Add initial camera position
       initialCameraPosition: initialCameraPosition,
     );
+  }
+
+  void updateCurrentLocation() async {
+    try {
+      var locationData = await locationService.getLocation();
+    } on LocationServiceException catch (e) {
+      // TODO
+    } on LocationPermissionException catch (e) {
+      // TODO
+    } catch (e) {
+      // TODO
+    }
   }
 }
