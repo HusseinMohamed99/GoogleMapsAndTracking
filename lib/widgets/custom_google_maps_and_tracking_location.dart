@@ -17,6 +17,8 @@ class _CustomGoogleMapsAndTrackingLocationState
   late TextEditingController textEditingController;
   Set<Marker> markers = {};
 
+  List<PlaceAutocompleteModel> places = [];
+
   @override
   void initState() {
     googleMapsPlacesService = GoogleMapsPlacesService();
@@ -36,6 +38,9 @@ class _CustomGoogleMapsAndTrackingLocationState
         var result = await googleMapsPlacesService.getPredictions(
           input: textEditingController.text,
         );
+        places.clear();
+        places.addAll(result);
+        setState(() {});
       }
     });
   }
@@ -73,6 +78,15 @@ class _CustomGoogleMapsAndTrackingLocationState
                 textEditingController: textEditingController,
               ),
             ),
+            ListView.separated(
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return Text(places[index].description ?? '');
+                },
+                separatorBuilder: (context, index) {
+                  return const Divider();
+                },
+                itemCount: places.length),
           ],
         ),
       ),

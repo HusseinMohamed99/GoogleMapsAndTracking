@@ -22,7 +22,7 @@ class GoogleMapsPlacesService {
       }
       return places;
     } else {
-      throw Exception('Failed to load predictions');
+      throw Exception();
     }
   }
 }
