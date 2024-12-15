@@ -24,16 +24,31 @@ class _CustomGoogleMapsAndTrackingLocationState
 
   @override
   Widget build(BuildContext context) {
-    return GoogleMap(
-      markers: markers,
-      zoomControlsEnabled: false,
-      // initial camera position
-      initialCameraPosition: initialCameraPosition,
-      // on map created
-      onMapCreated: (controller) {
-        googleMapController = controller;
-        updateCurrentLocation();
-      },
+    return Scaffold(
+      resizeToAvoidBottomInset: false, // to avoid bottom overflow
+      body: SafeArea(
+        child: Stack(
+          children: [
+            GoogleMap(
+              markers: markers,
+              zoomControlsEnabled: false,
+              // initial camera position
+              initialCameraPosition: initialCameraPosition,
+              // on map created
+              onMapCreated: (controller) {
+                googleMapController = controller;
+                updateCurrentLocation();
+              },
+            ),
+            const Positioned(
+              top: 16,
+              left: 16,
+              right: 16,
+              child: CustomTextField(),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
