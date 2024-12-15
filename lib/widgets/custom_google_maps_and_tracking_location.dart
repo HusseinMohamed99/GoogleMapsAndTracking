@@ -11,6 +11,7 @@ class CustomGoogleMapsAndTrackingLocation extends StatefulWidget {
 class _CustomGoogleMapsAndTrackingLocationState
     extends State<CustomGoogleMapsAndTrackingLocation> {
   late CameraPosition initialCameraPosition;
+  late GoogleMapsPlacesService googleMapsPlacesService;
   late LocationService locationService;
   late GoogleMapController googleMapController;
   late TextEditingController textEditingController;
@@ -18,10 +19,25 @@ class _CustomGoogleMapsAndTrackingLocationState
 
   @override
   void initState() {
+    googleMapsPlacesService = GoogleMapsPlacesService();
     textEditingController = TextEditingController();
     initialCameraPosition = const CameraPosition(target: LatLng(0, 0));
     locationService = LocationService();
+    fetchPredictions();
     super.initState();
+  }
+
+  void fetchPredictions() {
+    textEditingController.addListener(() async {
+      // search places
+      if (textEditingController.text.isNotEmpty) {
+        // get predictions
+        // display predictions
+        var result = await googleMapsPlacesService.getPredictions(
+          input: textEditingController.text,
+        );
+      }
+    });
   }
 
   @override
