@@ -203,7 +203,6 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
   }
 }
 
-
 /// Live Location Tracker
 // Steps:
 // 1. inquire about location service.
@@ -211,4 +210,3 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
 // 3. get the current location
 // 4. listen to location changes
 // 5. update the map with the new location
- 

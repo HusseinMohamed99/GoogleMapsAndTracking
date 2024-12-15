@@ -64,3 +64,11 @@ class _CustomGoogleMapsAndTrackingLocationState
     }
   }
 }
+
+// TextField => Search Places
+// Build Route => Draw Route between two places
+
+// 1. create TextField
+// 2. listen to the textfield
+// 3. create a function to search places
+// 4. display the search results
