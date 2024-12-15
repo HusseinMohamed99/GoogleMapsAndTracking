@@ -13,13 +13,22 @@ class _CustomGoogleMapsAndTrackingLocationState
   late CameraPosition initialCameraPosition;
   late LocationService locationService;
   late GoogleMapController googleMapController;
+  late TextEditingController textEditingController;
   Set<Marker> markers = {};
 
   @override
   void initState() {
+    textEditingController = TextEditingController();
     initialCameraPosition = const CameraPosition(target: LatLng(0, 0));
     locationService = LocationService();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    textEditingController.dispose();
+    super.dispose();
   }
 
   @override
@@ -40,11 +49,13 @@ class _CustomGoogleMapsAndTrackingLocationState
                 updateCurrentLocation();
               },
             ),
-            const Positioned(
+            Positioned(
               top: 16,
               left: 16,
               right: 16,
-              child: CustomTextField(),
+              child: CustomTextField(
+                textEditingController: textEditingController,
+              ),
             ),
           ],
         ),
