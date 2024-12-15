@@ -13,13 +13,11 @@ class _CustomGoogleMapsAndTrackingLocationState
   late CameraPosition initialCameraPosition;
   late LocationService locationService;
   late GoogleMapController googleMapController;
+  Set<Marker> markers = {};
 
   @override
   void initState() {
-    initialCameraPosition = const CameraPosition(
-      zoom: 13,
-      target: LatLng(0, 0),
-    );
+    initialCameraPosition = const CameraPosition(target: LatLng(0, 0));
     locationService = LocationService();
     super.initState();
   }
@@ -27,7 +25,7 @@ class _CustomGoogleMapsAndTrackingLocationState
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
-      //
+      markers: markers,
       zoomControlsEnabled: false,
       // initial camera position
       initialCameraPosition: initialCameraPosition,
@@ -42,13 +40,21 @@ class _CustomGoogleMapsAndTrackingLocationState
   void updateCurrentLocation() async {
     try {
       var locationData = await locationService.getLocation();
+      LatLng currentLocation =
+          LatLng(locationData.latitude!, locationData.longitude!);
+      Marker currentLocationMarker = Marker(
+        markerId: const MarkerId('currentLocation'),
+        position: currentLocation,
+      );
       CameraPosition newCameraPosition = CameraPosition(
-        target: LatLng(locationData.latitude!, locationData.longitude!),
+        target: currentLocation,
         zoom: 16,
       );
       googleMapController.animateCamera(
         CameraUpdate.newCameraPosition(newCameraPosition),
       );
+      markers.add(currentLocationMarker);
+      setState(() {});
     } on LocationServiceException catch (e) {
       log('Error getting location: $e');
     } on LocationPermissionException catch (e) {
