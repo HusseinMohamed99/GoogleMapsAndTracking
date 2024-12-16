@@ -13,17 +13,14 @@ class CustomTextField extends StatelessWidget {
       controller: textEditingController,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+        hintText: 'Search here',
+        prefixIcon: const Icon(Icons.search),
+        filled: true,
+        fillColor: Colors.white,
         border: buildBorder(),
         enabledBorder: buildBorder(),
         focusedBorder: buildBorder(),
-        fillColor: Colors.white,
-        filled: true,
-        hintText: 'Search here',
-        prefixIcon: const Icon(Icons.search),
       ),
-      onChanged: (value) {
-        // search places
-      },
     );
   }
 

@@ -4,8 +4,9 @@ import 'package:google_maps/model/place_autocomplete_model/place_autocomplete_mo
 import 'package:http/http.dart' as http;
 
 class GoogleMapsPlacesService {
-  final String baseUrl = 'https://maps.googleapis.com/maps/api/place/';
+  final String baseUrl = 'https://maps.googleapis.com/maps/api/place';
   final String apiKey = 'AIzaSyA_Sz-vJvykvyFQDSk9cFRgVFK_28K-6nk';
+
   Future<List<PlaceAutocompleteModel>> getPredictions(
       {required String input}) async {
     // Fetch places from Google Maps Places API

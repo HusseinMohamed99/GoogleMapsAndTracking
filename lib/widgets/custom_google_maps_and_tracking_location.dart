@@ -73,19 +73,16 @@ class _CustomGoogleMapsAndTrackingLocationState
               top: 16,
               left: 16,
               right: 16,
-              child: CustomTextField(
-                textEditingController: textEditingController,
+              child: Column(
+                children: [
+                  CustomTextField(
+                    textEditingController: textEditingController,
+                  ),
+                  const SizedBox(height: 16),
+                  CustomListView(places: places),
+                ],
               ),
             ),
-            ListView.separated(
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return Text(places[index].description ?? '');
-                },
-                separatorBuilder: (context, index) {
-                  return const Divider();
-                },
-                itemCount: places.length),
           ],
         ),
       ),
@@ -119,6 +116,7 @@ class _CustomGoogleMapsAndTrackingLocationState
     }
   }
 }
+
 
 // TextField => Search Places
 // Build Route => Draw Route between two places
