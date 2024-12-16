@@ -41,6 +41,9 @@ class _CustomGoogleMapsAndTrackingLocationState
         places.clear();
         places.addAll(result);
         setState(() {});
+      } else {
+        places.clear();
+        setState(() {});
       }
     });
   }
