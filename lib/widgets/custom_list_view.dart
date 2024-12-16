@@ -5,10 +5,12 @@ class CustomListView extends StatelessWidget {
     super.key,
     required this.places,
     required this.googleMapsPlacesService,
+    required this.onPlaceSelect,
   });
 
   final List<PlaceAutocompleteModel> places;
   final GoogleMapsPlacesService googleMapsPlacesService;
+  final Function(PlaceDetailsModel) onPlaceSelect;
 
   @override
   Widget build(BuildContext context) {
@@ -26,26 +28,28 @@ class CustomListView extends StatelessWidget {
         ],
       ),
       child: ListView.separated(
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            return ListTile(
-              leading: const Icon(FontAwesomeIcons.locationDot),
-              title: Text(places[index].description!),
-              trailing: IconButton(
-                onPressed: () async {
-                  var placeDetails =
-                      await googleMapsPlacesService.getPlaceDetails(
-                    placeID: places[index].placeId.toString(),
-                  );
-                },
-                icon: const Icon(FontAwesomeIcons.arrowRight),
-              ),
-            );
-          },
-          separatorBuilder: (context, index) {
-            return const Divider();
-          },
-          itemCount: places.length),
+        shrinkWrap: true,
+        itemBuilder: (context, index) {
+          return ListTile(
+            leading: const Icon(FontAwesomeIcons.locationDot),
+            title: Text(places[index].description!),
+            trailing: IconButton(
+              onPressed: () async {
+                var placeDetails =
+                    await googleMapsPlacesService.getPlaceDetails(
+                  placeID: places[index].placeId.toString(),
+                );
+                onPlaceSelect(placeDetails);
+              },
+              icon: const Icon(FontAwesomeIcons.arrowRight),
+            ),
+          );
+        },
+        separatorBuilder: (context, index) {
+          return const Divider();
+        },
+        itemCount: places.length,
+      ),
     );
   }
 }

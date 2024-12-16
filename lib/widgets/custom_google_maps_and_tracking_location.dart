@@ -30,19 +30,21 @@ class _CustomGoogleMapsAndTrackingLocationState
   }
 
   void fetchPredictions() {
-    textEditingController.addListener(() async {
-      if (textEditingController.text.isNotEmpty) {
-        var result = await googleMapsPlacesService.getPredictions(
-          input: textEditingController.text,
-        );
-        places.clear();
-        places.addAll(result);
-        setState(() {});
-      } else {
-        places.clear();
-        setState(() {});
-      }
-    });
+    textEditingController.addListener(
+      () async {
+        if (textEditingController.text.isNotEmpty) {
+          var result = await googleMapsPlacesService.getPredictions(
+            input: textEditingController.text,
+          );
+          places.clear();
+          places.addAll(result);
+          setState(() {});
+        } else {
+          places.clear();
+          setState(() {});
+        }
+      },
+    );
   }
 
   @override
@@ -83,6 +85,11 @@ class _CustomGoogleMapsAndTrackingLocationState
                   CustomListView(
                     places: places,
                     googleMapsPlacesService: googleMapsPlacesService,
+                    onPlaceSelect: (placeDetailsModel) {
+                      textEditingController.clear();
+                      places.clear();
+                      setState(() {});
+                    },
                   ),
                 ],
               ),
