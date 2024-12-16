@@ -80,7 +80,10 @@ class _CustomGoogleMapsAndTrackingLocationState
                     textEditingController: textEditingController,
                   ),
                   const SizedBox(height: 16),
-                  CustomListView(places: places),
+                  CustomListView(
+                    places: places,
+                    googleMapsPlacesService: googleMapsPlacesService,
+                  ),
                 ],
               ),
             ),

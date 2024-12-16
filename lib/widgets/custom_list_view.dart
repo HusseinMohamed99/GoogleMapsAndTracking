@@ -4,9 +4,11 @@ class CustomListView extends StatelessWidget {
   const CustomListView({
     super.key,
     required this.places,
+    required this.googleMapsPlacesService,
   });
 
   final List<PlaceAutocompleteModel> places;
+  final GoogleMapsPlacesService googleMapsPlacesService;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,12 @@ class CustomListView extends StatelessWidget {
               leading: const Icon(FontAwesomeIcons.locationDot),
               title: Text(places[index].description!),
               trailing: IconButton(
-                onPressed: () {},
+                onPressed: () async {
+                  var placeDetails =
+                      await googleMapsPlacesService.getPlaceDetails(
+                    placeID: places[index].placeId.toString(),
+                  );
+                },
                 icon: const Icon(FontAwesomeIcons.arrowRight),
               ),
             );
