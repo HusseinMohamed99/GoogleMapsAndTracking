@@ -11,46 +11,15 @@ class CustomGoogleMapsAndTrackingLocation extends StatefulWidget {
 class _CustomGoogleMapsAndTrackingLocationState
     extends State<CustomGoogleMapsAndTrackingLocation> {
   late CameraPosition initialCameraPosition;
-  late GoogleMapsPlacesService googleMapsPlacesService;
   late LocationService locationService;
   late GoogleMapController googleMapController;
-  late TextEditingController textEditingController;
   Set<Marker> markers = {};
-
-  List<PlaceAutocompleteModel> places = [];
 
   @override
   void initState() {
-    googleMapsPlacesService = GoogleMapsPlacesService();
-    textEditingController = TextEditingController();
     initialCameraPosition = const CameraPosition(target: LatLng(0, 0));
     locationService = LocationService();
-    fetchPredictions();
     super.initState();
-  }
-
-  void fetchPredictions() {
-    textEditingController.addListener(
-      () async {
-        if (textEditingController.text.isNotEmpty) {
-          var result = await googleMapsPlacesService.getPredictions(
-            input: textEditingController.text,
-          );
-          places.clear();
-          places.addAll(result);
-          setState(() {});
-        } else {
-          places.clear();
-          setState(() {});
-        }
-      },
-    );
-  }
-
-  @override
-  void dispose() {
-    textEditingController.dispose();
-    super.dispose();
   }
 
   @override
@@ -79,16 +48,16 @@ class _CustomGoogleMapsAndTrackingLocationState
               child: Column(
                 children: [
                   CustomTextField(
-                    textEditingController: textEditingController,
-                  ),
-                  const SizedBox(height: 16),
-                  CustomListView(
-                    places: places,
-                    googleMapsPlacesService: googleMapsPlacesService,
-                    onPlaceSelect: (placeDetailsModel) {
-                      textEditingController.clear();
-                      places.clear();
-                      setState(() {});
+                    readOnly: true,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const DisplayPlaces();
+                          },
+                        ),
+                      );
                     },
                   ),
                 ],

@@ -15,3 +15,5 @@ part './../../../widgets/custom_google_map_widget.dart';
 part './../../../widgets/custom_google_maps_and_tracking_location.dart';
 part './../../../widgets/custom_list_view.dart';
 part './../../../widgets/custom_text_field.dart';
+
+part './../../../widgets/display_places.dart';

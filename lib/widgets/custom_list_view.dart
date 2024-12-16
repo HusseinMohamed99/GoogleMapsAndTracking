@@ -14,6 +14,9 @@ class CustomListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (places.isEmpty) {
+      return const SizedBox.shrink();
+    }
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
