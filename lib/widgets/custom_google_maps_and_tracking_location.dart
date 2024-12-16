@@ -31,10 +31,7 @@ class _CustomGoogleMapsAndTrackingLocationState
 
   void fetchPredictions() {
     textEditingController.addListener(() async {
-      // search places
       if (textEditingController.text.isNotEmpty) {
-        // get predictions
-        // display predictions
         var result = await googleMapsPlacesService.getPredictions(
           input: textEditingController.text,
         );
@@ -57,7 +54,8 @@ class _CustomGoogleMapsAndTrackingLocationState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false, // to avoid bottom overflow
+      // to avoid bottom overflow
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Stack(
           children: [
