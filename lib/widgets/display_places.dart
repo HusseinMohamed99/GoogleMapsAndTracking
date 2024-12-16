@@ -12,6 +12,7 @@ class _DisplayPlacesState extends State<DisplayPlaces> {
   late GoogleMapsPlacesService googleMapsPlacesService;
   List<PlaceAutocompleteModel> places = [];
   late Uuid uuid;
+  String? sessionToken;
 
   @override
   void initState() {
@@ -24,13 +25,13 @@ class _DisplayPlacesState extends State<DisplayPlaces> {
   }
 
   void fetchPredictions() {
-    var sessionToken = uuid.v4();
     textEditingController.addListener(
       () async {
+        sessionToken ??= uuid.v4();
         if (textEditingController.text.isNotEmpty) {
           var result = await googleMapsPlacesService.getPredictions(
             input: textEditingController.text,
-            sessionToken: sessionToken,
+            sessionToken: sessionToken!,
           );
           places.clear();
           places.addAll(result);
@@ -51,7 +52,6 @@ class _DisplayPlacesState extends State<DisplayPlaces> {
 
   @override
   Widget build(BuildContext context) {
-    print(uuid.v4());
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -80,6 +80,7 @@ class _DisplayPlacesState extends State<DisplayPlaces> {
                 onPlaceSelect: (placeDetailsModel) {
                   textEditingController.clear();
                   places.clear();
+                  sessionToken = null;
                   setState(() {});
                   print(placeDetailsModel.geometry!.location!.lat);
                 },
