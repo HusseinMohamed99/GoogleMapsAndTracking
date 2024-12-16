@@ -82,7 +82,6 @@ class _DisplayPlacesState extends State<DisplayPlaces> {
                   places.clear();
                   sessionToken = null;
                   setState(() {});
-                  print(placeDetailsModel.geometry!.location!.lat);
                 },
               ),
             ],
