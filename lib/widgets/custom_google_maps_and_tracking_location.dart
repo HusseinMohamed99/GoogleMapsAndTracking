@@ -118,7 +118,6 @@ class _CustomGoogleMapsAndTrackingLocationState
   }
 }
 
-
 // TextField => Search Places
 // Build Route => Draw Route between two places
 
