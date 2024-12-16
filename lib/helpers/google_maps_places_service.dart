@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:google_maps/model/place_autocomplete_model/place_autocomplete_model.dart';
+import 'package:google_maps/model/place_details_model/place_details_model.dart';
 import 'package:http/http.dart' as http;
 
 class GoogleMapsPlacesService {
@@ -22,6 +23,22 @@ class GoogleMapsPlacesService {
         places.add(PlaceAutocompleteModel.fromJson(item));
       }
       return places;
+    } else {
+      throw Exception();
+    }
+  }
+
+  Future<PlaceDetailsModel> getPlaceDetails({required String placeID}) async {
+    // Fetch places from Google Maps Places API
+    var response = await http
+        .get(Uri.parse('$baseUrl/details/json?place_id=$placeID&key=$apiKey'));
+
+    // Check if the response is successful
+    if (response.statusCode == 200) {
+      // Parse the response
+      var data = jsonDecode(response.body)['result'];
+
+      return PlaceDetailsModel.fromJson(data);
     } else {
       throw Exception();
     }
