@@ -14,7 +14,7 @@ class CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(horizontal: 16),
         hintText: 'Search here',
-        prefixIcon: const Icon(Icons.search),
+        prefixIcon: const Icon(FontAwesomeIcons.magnifyingGlass),
         filled: true,
         fillColor: Colors.white,
         border: buildBorder(),

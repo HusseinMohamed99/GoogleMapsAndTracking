@@ -16,7 +16,12 @@ class CustomListView extends StatelessWidget {
           shrinkWrap: true,
           itemBuilder: (context, index) {
             return ListTile(
+              leading: const Icon(FontAwesomeIcons.locationDot),
               title: Text(places[index].description!),
+              trailing: IconButton(
+                onPressed: () {},
+                icon: const Icon(FontAwesomeIcons.arrowRight),
+              ),
             );
           },
           separatorBuilder: (context, index) {
