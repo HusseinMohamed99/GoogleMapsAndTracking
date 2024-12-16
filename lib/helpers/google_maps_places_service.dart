@@ -8,8 +8,10 @@ class GoogleMapsPlacesService {
   final String baseUrl = 'https://maps.googleapis.com/maps/api/place';
   final String apiKey = 'AIzaSyA_Sz-vJvykvyFQDSk9cFRgVFK_28K-6nk';
 
-  Future<List<PlaceAutocompleteModel>> getPredictions(
-      {required String input}) async {
+  Future<List<PlaceAutocompleteModel>> getPredictions({
+    required String input,
+    required String sessionToken,
+  }) async {
     // Fetch places from Google Maps Places API
     var response = await http
         .get(Uri.parse('$baseUrl/autocomplete/json?input=$input&key=$apiKey'));
