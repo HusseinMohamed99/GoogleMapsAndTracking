@@ -22,14 +22,14 @@ class _CustomGoogleMapsAndTrackingLocationState
   late LatLng destination;
   late RoutesService routesService;
   late LocationService locationService;
-  late PlacesService googleMapsPlacesService;
+  late PlacesService placesService;
 
   @override
   void initState() {
     initialCameraPosition = const CameraPosition(target: LatLng(0, 0));
     locationService = LocationService();
     textEditingController = TextEditingController();
-    googleMapsPlacesService = PlacesService();
+    placesService = PlacesService();
     uuid = const Uuid();
     routesService = RoutesService();
 
@@ -42,7 +42,7 @@ class _CustomGoogleMapsAndTrackingLocationState
       () async {
         sessionToken ??= uuid.v4();
         if (textEditingController.text.isNotEmpty) {
-          var result = await googleMapsPlacesService.getPredictions(
+          var result = await placesService.getPredictions(
             input: textEditingController.text,
             sessionToken: sessionToken!,
           );
@@ -95,7 +95,7 @@ class _CustomGoogleMapsAndTrackingLocationState
                   const SizedBox(height: 16),
                   CustomListView(
                     places: places,
-                    googleMapsPlacesService: googleMapsPlacesService,
+                    googleMapsPlacesService: placesService,
                     onPlaceSelect: (placeDetailsModel) async {
                       textEditingController.clear();
                       places.clear();
