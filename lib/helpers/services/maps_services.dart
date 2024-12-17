@@ -56,4 +56,43 @@ class MapsServices {
     }).toList();
     return route;
   }
+
+  void displayRoute(
+    List<LatLng> points, {
+    required Set<Polyline> polyLines,
+    required GoogleMapController googleMapController,
+  }) {
+    Polyline route = Polyline(
+      color: Colors.blue,
+      width: 5,
+      polylineId: const PolylineId('route'),
+      points: points,
+    );
+    polyLines.add(route);
+    LatLngBounds bounds = getLatLngBounds(points);
+    googleMapController.animateCamera(
+      CameraUpdate.newLatLngBounds(
+        bounds,
+        32,
+      ),
+    );
+  }
+
+  LatLngBounds getLatLngBounds(List<LatLng> points) {
+    var southWestLatitude = points.first.latitude;
+    var southWestLongitude = points.first.longitude;
+    var northWestLatitude = points.first.latitude;
+    var northWestLongitude = points.first.longitude;
+
+    for (var point in points) {
+      southWestLatitude = min(southWestLatitude, point.latitude);
+      southWestLongitude = min(southWestLongitude, point.longitude);
+      northWestLatitude = max(northWestLatitude, point.latitude);
+      northWestLongitude = max(northWestLongitude, point.longitude);
+    }
+    return LatLngBounds(
+      southwest: LatLng(southWestLatitude, southWestLongitude),
+      northeast: LatLng(northWestLatitude, northWestLongitude),
+    );
+  }
 }
