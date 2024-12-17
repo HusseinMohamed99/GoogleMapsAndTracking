@@ -95,4 +95,26 @@ class MapsServices {
       northeast: LatLng(northWestLatitude, northWestLongitude),
     );
   }
+
+  Future<LatLng> updateCurrentLocation({
+    required GoogleMapController googleMapController,
+    required Set<Marker> markers,
+  }) async {
+    var locationData = await locationService.getLocation();
+    var currentLocation =
+        LatLng(locationData.latitude!, locationData.longitude!);
+    Marker currentLocationMarker = Marker(
+      markerId: const MarkerId('currentLocation'),
+      position: currentLocation,
+    );
+    CameraPosition newCameraPosition = CameraPosition(
+      target: currentLocation,
+      zoom: 16,
+    );
+    googleMapController.animateCamera(
+      CameraUpdate.newCameraPosition(newCameraPosition),
+    );
+    markers.add(currentLocationMarker);
+    return currentLocation;
+  }
 }
