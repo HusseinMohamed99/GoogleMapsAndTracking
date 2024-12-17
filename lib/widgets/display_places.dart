@@ -100,7 +100,7 @@ class _DisplayPlacesState extends State<DisplayPlaces> {
     );
   }
 
-  void getRouteData() {
+  Future<RouteModel> getRouteData() async {
     RoutesBody routesBody = RoutesBody(
       origin: Origin(
         location: LocationModel(
@@ -118,17 +118,19 @@ class _DisplayPlacesState extends State<DisplayPlaces> {
           ),
         ),
       ),
-      travelMode: 'driving',
-      routingPreference: 'lessTolls',
+      travelMode: 'DRIVE',
+      routingPreference: 'TRAFFIC_AWARE',
       computeAlternativeRoutes: true,
       routeModifiers: RouteModifiers(
         avoidTolls: false,
         avoidHighways: false,
         avoidFerries: false,
       ),
-      languageCode: 'en',
-      units: 'metric',
+      languageCode: 'en-US',
+      units: 'IMPERIAL',
     );
-    routesService.fetchRoutes(routesBody: routesBody);
+    RoutesModel routes =
+        await routesService.fetchRoutes(routesBody: routesBody);
+    return routes.routes!.first;
   }
 }

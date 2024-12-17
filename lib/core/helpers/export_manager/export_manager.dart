@@ -5,6 +5,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_maps/helpers/services/google_maps_places_service.dart';
 import 'package:google_maps/model/place_details_model/place_details_model.dart';
 import 'package:google_maps/model/routes_body/lat_lng.dart';
+import 'package:google_maps/model/routes_model/route.dart';
+import 'package:google_maps/model/routes_model/routes_model.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:uuid/uuid.dart';
