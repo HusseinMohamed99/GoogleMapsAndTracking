@@ -22,14 +22,14 @@ class _CustomGoogleMapsAndTrackingLocationState
   late LatLng destination;
   late RoutesService routesService;
   late LocationService locationService;
-  late GoogleMapsPlacesService googleMapsPlacesService;
+  late PlacesService googleMapsPlacesService;
 
   @override
   void initState() {
     initialCameraPosition = const CameraPosition(target: LatLng(0, 0));
     locationService = LocationService();
     textEditingController = TextEditingController();
-    googleMapsPlacesService = GoogleMapsPlacesService();
+    googleMapsPlacesService = PlacesService();
     uuid = const Uuid();
     routesService = RoutesService();
 
