@@ -154,11 +154,14 @@ class _CustomGoogleMapsAndTrackingLocationState
       markers.add(currentLocationMarker);
       setState(() {});
     } on LocationServiceException catch (e) {
-      log('Error getting location: $e');
+      print('Error getting location: $e');
+      // log('Error getting location: $e');
     } on LocationPermissionException catch (e) {
-      log('Error getting location: $e');
+      // log('Error getting location: $e');
+      print('Error getting location: $e');
     } catch (e) {
-      log('Error getting location: $e');
+      // log('Error getting location: $e');
+      print('Error getting location: $e');
     }
   }
 
@@ -202,7 +205,32 @@ class _CustomGoogleMapsAndTrackingLocationState
       points: points,
     );
     polyLines.add(route);
+    LatLngBounds bounds = getLatLngBounds(points);
+    googleMapController.animateCamera(
+      CameraUpdate.newLatLngBounds(
+        bounds,
+        16,
+      ),
+    );
     setState(() {});
+  }
+
+  LatLngBounds getLatLngBounds(List<LatLng> points) {
+    var southWestLatitude = points.first.latitude;
+    var southWestLongitude = points.first.longitude;
+    var northWestLatitude = points.first.latitude;
+    var northWestLongitude = points.first.longitude;
+
+    for (var point in points) {
+      southWestLatitude = min(southWestLatitude, point.latitude);
+      southWestLongitude = min(southWestLongitude, point.longitude);
+      northWestLatitude = max(northWestLatitude, point.latitude);
+      northWestLongitude = max(northWestLongitude, point.longitude);
+    }
+    return LatLngBounds(
+      southwest: LatLng(southWestLatitude, southWestLongitude),
+      northeast: LatLng(northWestLatitude, northWestLongitude),
+    );
   }
 }
 
@@ -213,3 +241,6 @@ class _CustomGoogleMapsAndTrackingLocationState
 // 2. listen to the textfield
 // 3. create a function to search places
 // 4. display the search results
+
+// southwest=> أقل قيمة في LatLng
+// northeast=> أكبر قيمة في LatLng
