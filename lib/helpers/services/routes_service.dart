@@ -10,7 +10,7 @@ class RoutesService {
       'https://routes.googleapis.com/directions/v2:computeRoutes';
   final String apiKey = 'AIzaSyA_Sz-vJvykvyFQDSk9cFRgVFK_28K-6nk';
 
-  Future<RoutesModel> fetchRoutes(RoutesBody routesBody) async {
+  Future<RoutesModel> fetchRoutes({required RoutesBody routesBody}) async {
     Uri url = Uri.parse(baseUrl);
     Map<String, String> headers = {
       'Content-Type': 'application/json',

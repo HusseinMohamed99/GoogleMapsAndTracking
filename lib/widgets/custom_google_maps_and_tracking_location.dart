@@ -13,6 +13,7 @@ class _CustomGoogleMapsAndTrackingLocationState
   late CameraPosition initialCameraPosition;
   late LocationService locationService;
   late GoogleMapController googleMapController;
+  late LatLng currentLocation;
   Set<Marker> markers = {};
 
   @override
@@ -72,8 +73,7 @@ class _CustomGoogleMapsAndTrackingLocationState
   void updateCurrentLocation() async {
     try {
       var locationData = await locationService.getLocation();
-      LatLng currentLocation =
-          LatLng(locationData.latitude!, locationData.longitude!);
+      currentLocation = LatLng(locationData.latitude!, locationData.longitude!);
       Marker currentLocationMarker = Marker(
         markerId: const MarkerId('currentLocation'),
         position: currentLocation,

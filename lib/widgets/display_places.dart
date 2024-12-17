@@ -13,12 +13,16 @@ class _DisplayPlacesState extends State<DisplayPlaces> {
   List<PlaceAutocompleteModel> places = [];
   late Uuid uuid;
   String? sessionToken;
+  late LatLng destination;
+  late RoutesService routesService;
+  late LatLng currentLocation;
 
   @override
   void initState() {
     textEditingController = TextEditingController();
     googleMapsPlacesService = GoogleMapsPlacesService();
     uuid = const Uuid();
+    routesService = RoutesService();
 
     fetchPredictions();
     super.initState();
@@ -82,6 +86,11 @@ class _DisplayPlacesState extends State<DisplayPlaces> {
                   places.clear();
                   sessionToken = null;
                   setState(() {});
+                  destination = LatLng(
+                    placeDetailsModel.geometry!.location!.lat!,
+                    placeDetailsModel.geometry!.location!.lng!,
+                  );
+                  getRouteData();
                 },
               ),
             ],
@@ -89,5 +98,37 @@ class _DisplayPlacesState extends State<DisplayPlaces> {
         ),
       ),
     );
+  }
+
+  void getRouteData() {
+    RoutesBody routesBody = RoutesBody(
+      origin: Origin(
+        location: LocationModel(
+          latLng: LatLngModel(
+            latitude: currentLocation.latitude,
+            longitude: currentLocation.longitude,
+          ),
+        ),
+      ),
+      destination: Destination(
+        location: LocationModel(
+          latLng: LatLngModel(
+            latitude: currentLocation.latitude,
+            longitude: currentLocation.longitude,
+          ),
+        ),
+      ),
+      travelMode: 'driving',
+      routingPreference: 'lessTolls',
+      computeAlternativeRoutes: true,
+      routeModifiers: RouteModifiers(
+        avoidTolls: false,
+        avoidHighways: false,
+        avoidFerries: false,
+      ),
+      languageCode: 'en',
+      units: 'metric',
+    );
+    routesService.fetchRoutes(routesBody: routesBody);
   }
 }
