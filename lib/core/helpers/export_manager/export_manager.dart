@@ -14,6 +14,7 @@ import 'package:uuid/uuid.dart';
 import '../../../helpers/services/routes_service.dart';
 import '../../../model/place_autocomplete_model/place_autocomplete_model.dart';
 import '../../../model/routes_body/location.dart';
+import '../../../model/routes_body/location_info.dart';
 
 part '../../../helpers/services/location_service.dart';
 part './../../../model/place_model.dart';

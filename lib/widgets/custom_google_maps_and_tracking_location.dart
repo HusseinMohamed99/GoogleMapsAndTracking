@@ -89,14 +89,6 @@ class _CustomGoogleMapsAndTrackingLocationState
               child: Column(
                 children: [
                   CustomTextField(
-                    prefixIcon: IconButton(
-                      icon: const Icon(FontAwesomeIcons.arrowLeft),
-                      onPressed: () {
-                        if (Navigator.canPop(context)) {
-                          Navigator.pop(context);
-                        }
-                      },
-                    ),
                     textEditingController: textEditingController,
                   ),
                   const SizedBox(height: 16),
@@ -112,7 +104,7 @@ class _CustomGoogleMapsAndTrackingLocationState
                         placeDetailsModel.geometry!.location!.lat!,
                         placeDetailsModel.geometry!.location!.lng!,
                       );
-                      var points = await getRouteData();
+                      var points = await getRouteData(latLng: destination);
                       displayRoute(points);
                     },
                   ),
@@ -170,26 +162,25 @@ class _CustomGoogleMapsAndTrackingLocationState
     }
   }
 
-  Future<List<LatLng>> getRouteData() async {
-    LocationModel origin = LocationModel(
-      latLng: LatLngModel(
+  Future<List<LatLng>> getRouteData({required LatLng latLng}) async {
+    LocationInfoModel origin = LocationInfoModel(
+      location: LocationModel(
+          latLng: LatLngModel(
         latitude: currentLocation.latitude,
         longitude: currentLocation.longitude,
-      ),
+      )),
     );
-    LocationModel destination = LocationModel(
-      latLng: LatLngModel(
-        latitude: currentLocation.latitude,
-        longitude: currentLocation.longitude,
-      ),
+    LocationInfoModel destination = LocationInfoModel(
+      location: LocationModel(
+          latLng: LatLngModel(
+        latitude: latLng.latitude,
+        longitude: latLng.longitude,
+      )),
     );
     RoutesModel routes = await routesService.fetchRoutes(
-      origin: origin,
-      destination: destination,
-    );
-
-    List<LatLng> route = getDecodedRoute(routes);
-    return route;
+        origin: origin, destination: destination);
+    List<LatLng> points = getDecodedRoute(routes);
+    return points;
   }
 
   List<LatLng> getDecodedRoute(RoutesModel routes) {

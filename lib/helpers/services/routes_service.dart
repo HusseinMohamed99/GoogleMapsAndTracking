@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:google_maps/model/routes_model/routes_model.dart';
 import 'package:http/http.dart' as http;
 
-import '../../model/routes_body/location.dart';
-import '../../model/routes_body/route_modifiers.dart';
+import '../../model/routes_body/location_info.dart';
+import '../../model/routes_body/routes_modifiers.dart';
 
 class RoutesService {
   final String baseUrl =
@@ -12,9 +12,9 @@ class RoutesService {
   final String apiKey = 'AIzaSyA_Sz-vJvykvyFQDSk9cFRgVFK_28K-6nk';
 
   Future<RoutesModel> fetchRoutes(
-      {required LocationModel origin,
-      required LocationModel destination,
-      RouteModifiers? routesModifiers}) async {
+      {required LocationInfoModel origin,
+      required LocationInfoModel destination,
+      RoutesModifiers? routesModifiers}) async {
     Uri url = Uri.parse(baseUrl);
     Map<String, String> headers = {
       'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ class RoutesService {
       "computeAlternativeRoutes": false,
       "routeModifiers": routesModifiers != null
           ? routesModifiers.toJson()
-          : RouteModifiers().toJson(),
+          : RoutesModifiers().toJson(),
       "languageCode": "en-US",
       "units": "IMPERIAL"
     };
@@ -38,7 +38,7 @@ class RoutesService {
     var response = await http.post(
       url,
       headers: headers,
-      body: body,
+      body: jsonEncode(body),
     );
 
     if (response.statusCode == 200) {
