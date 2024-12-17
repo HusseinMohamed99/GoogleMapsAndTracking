@@ -209,7 +209,7 @@ class _CustomGoogleMapsAndTrackingLocationState
     googleMapController.animateCamera(
       CameraUpdate.newLatLngBounds(
         bounds,
-        16,
+        32,
       ),
     );
     setState(() {});
