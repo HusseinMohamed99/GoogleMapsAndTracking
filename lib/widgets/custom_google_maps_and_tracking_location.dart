@@ -32,7 +32,6 @@ class _CustomGoogleMapsAndTrackingLocationState
     placesService = PlacesService();
     uuid = const Uuid();
     routesService = RoutesService();
-
     fetchPredictions();
     super.initState();
   }
@@ -41,18 +40,12 @@ class _CustomGoogleMapsAndTrackingLocationState
     textEditingController.addListener(
       () async {
         sessionToken ??= uuid.v4();
-        if (textEditingController.text.isNotEmpty) {
-          var result = await placesService.getPredictions(
-            input: textEditingController.text,
-            sessionToken: sessionToken!,
-          );
-          places.clear();
-          places.addAll(result);
-          setState(() {});
-        } else {
-          places.clear();
-          setState(() {});
-        }
+        await MapsServices().getPredictions(
+          input: textEditingController.text,
+          sessionToken: sessionToken!,
+          places: places,
+        );
+        setState(() {});
       },
     );
   }
