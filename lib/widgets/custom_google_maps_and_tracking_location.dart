@@ -110,25 +110,6 @@ class _CustomGoogleMapsAndTrackingLocationState
                   ),
                 ],
               ),
-              //  Column(
-              //   children: [
-              //     CustomTextField(
-              //       readOnly: true,
-              //       onTap: () {
-              //         Navigator.push(
-              //           context,
-              //           MaterialPageRoute(
-              //             builder: (context) {
-              //               return DisplayPlaces(
-              //                 currentLocation: currentLocation,
-              //               );
-              //             },
-              //           ),
-              //         );
-              //       },
-              //     ),
-              //   ],
-              // ),
             ),
           ],
         ),
@@ -154,14 +135,20 @@ class _CustomGoogleMapsAndTrackingLocationState
       markers.add(currentLocationMarker);
       setState(() {});
     } on LocationServiceException catch (e) {
-      print('Error getting location: $e');
+      if (kDebugMode) {
+        print('Error getting location: $e');
+      }
       // log('Error getting location: $e');
     } on LocationPermissionException catch (e) {
       // log('Error getting location: $e');
-      print('Error getting location: $e');
+      if (kDebugMode) {
+        print('Error getting location: $e');
+      }
     } catch (e) {
       // log('Error getting location: $e');
-      print('Error getting location: $e');
+      if (kDebugMode) {
+        print('Error getting location: $e');
+      }
     }
   }
 
@@ -242,5 +229,7 @@ class _CustomGoogleMapsAndTrackingLocationState
 // 3. create a function to search places
 // 4. display the search results
 
-// southwest=> أقل قيمة في LatLng
-// northeast=> أكبر قيمة في LatLng
+
+
+// southwest=> min Value LatLng
+// northeast=> max Value LatLng
