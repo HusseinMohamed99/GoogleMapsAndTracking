@@ -11,18 +11,19 @@ class CustomGoogleMapsAndTrackingLocation extends StatefulWidget {
 class _CustomGoogleMapsAndTrackingLocationState
     extends State<CustomGoogleMapsAndTrackingLocation> {
   late CameraPosition initialCameraPosition;
-  late LocationService locationService;
   late GoogleMapController googleMapController;
+  late TextEditingController textEditingController;
   late LatLng currentLocation;
   Set<Marker> markers = {};
   Set<Polyline> polyLines = {};
-  late TextEditingController textEditingController;
-  late GoogleMapsPlacesService googleMapsPlacesService;
   List<PlaceAutocompleteModel> places = [];
   late Uuid uuid;
   String? sessionToken;
   late LatLng destination;
   late RoutesService routesService;
+  late LocationService locationService;
+  late GoogleMapsPlacesService googleMapsPlacesService;
+
   @override
   void initState() {
     initialCameraPosition = const CameraPosition(target: LatLng(0, 0));
